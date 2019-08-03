@@ -22,63 +22,28 @@ class WebCrawler:
     input_file.close()
     #print(list_urls) Funciona
     values = {'User-Agent': 'Mozilla/5.0 (Windows 10 Home) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3'}
-    
+    diccionario = {}
     for i in range(len(list_urls)):
-      url1 = list_urls[0]
-      url2 = list_urls[1]
-      url3 = list_urls[2]
-      url4 = list_urls[3]
+      url = list_urls[i]
+      req = Request(url,headers=values)
+      ruta = urlopen(req).read()
 
-      req1 = Request(url1,headers=values)
-      req2 = Request(url2,headers=values)
-      req3 = Request(url3,headers=values)
-      req4 = Request(url4,headers=values)
-
-      ruta1 = urlopen(req1).read()
-      ruta2 = urlopen(req2).read()
-      ruta3 = urlopen(req3).read()
-      ruta4 = urlopen(req4).read()
-
-      soup1 = BeautifulSoup(ruta1, 'lxml')
-      soup2 = BeautifulSoup(ruta2, 'lxml')
-      soup3 = BeautifulSoup(ruta3, 'lxml')
-      soup4 = BeautifulSoup(ruta4, 'lxml')
-
+      soup = BeautifulSoup(ruta, 'lxml')
+      dict_datos = dict()
+      for name in soup.find('span', class_='base'):
+        for price in soup.find('span', class_='price'):
+          dict_datos[name] = price
       
-    dict_datos = dict()
-    list_name = []
-    list_price = []
+      k = dict_datos.keys()
+      v = dict_datos.values()
       
-    for name in soup1.find('span', class_='base'):
-      list_name.append(name)
+      for k,v in dict_datos.items():
+        diccionario[k] = v
 
-    for name in soup2.find('span', class_='base'):
-      list_name.append(name)
-    
-    for name in soup3.find('span', class_='base'):
-      list_name.append(name)
-    
-    for name in soup4.find('span', class_='base'):
-      list_name.append(name)
+    return diccionario
 
-    for price in soup1.find('span', class_='price'):
-      list_price.append(price)
-    
-    for price in soup2.find('span', class_='price'):
-      list_price.append(price)
-    
-    for price in soup3.find('span', class_='price'):
-      list_price.append(price)
-    
-    for price in soup4.find('span', class_='price'):
-      list_price.append(price)
-
-    dict_datos = {list_name[0]:list_price[0], list_name[1]:list_price[1], list_name[2]:list_price[2], list_name[3]:list_price[3]}  
-    
-    return dict_datos
-
-web = WebCrawler()
-web.crawl('test_urls.txt')
+#web = WebCrawler()
+#web.crawl('test_urls.txt')
 
 
 
