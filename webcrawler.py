@@ -29,16 +29,17 @@ class WebCrawler:
       ruta = urlopen(req).read()
 
       soup = BeautifulSoup(ruta, 'lxml')
-      dict_datos = dict()
-      for name in soup.find('span', class_='base'):
-        for price in soup.find('span', class_='price'):
-          dict_datos[name] = price
       
-      k = dict_datos.keys()
-      v = dict_datos.values()
+      # Buscar el nombre del producto
+      name_element = soup.find('span', class_='base')
+      # Buscar el precio del producto
+      price_element = soup.find('span', class_='price')
       
-      for k,v in dict_datos.items():
-        diccionario[k] = v
+      if name_element and price_element:
+        # Extraer el texto de los elementos
+        product_name = name_element.get_text(strip=True)
+        product_price = price_element.get_text(strip=True)
+        diccionario[product_name] = product_price
 
     return diccionario
 
