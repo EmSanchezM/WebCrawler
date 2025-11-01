@@ -8,9 +8,7 @@ verify_ssl = true
 [packages]
 beautifulsoup4 = "*"
 lxml = "*"
-urllib = "*"
 requests = "*"
-urllib-request = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3.11"
