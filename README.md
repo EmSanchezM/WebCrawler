@@ -5,7 +5,7 @@ Rastreador web que descarga y parsea páginas web para extraer información de p
 Este proyecto implementa un web crawler que lee URLs desde un archivo, descarga las páginas web y extrae información de productos (nombre y precio) utilizando BeautifulSoup4.
 
 ## Requisitos Previos
-- Python 3.11 o superior
+- Python 3.14 o superior
 - pip (gestor de paquetes de Python)
 - pipenv (opcional, recomendado)
 
@@ -39,14 +39,13 @@ source venv/bin/activate  # En Linux/Mac
 
 2. Instalar las dependencias:
 ```bash
-pip install beautifulsoup4 lxml requests
+pip install beautifulsoup4 lxml
 ```
 
 ## Dependencias
 El proyecto utiliza las siguientes librerías:
 - **beautifulsoup4**: Para parsear el HTML de las páginas web
 - **lxml**: Parser XML/HTML de alto rendimiento
-- **requests**: Para realizar peticiones HTTP
 
 ## Estructura del Proyecto
 ```
